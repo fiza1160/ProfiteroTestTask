@@ -60,7 +60,7 @@ def parse_product_pages(pages)
     pages.each do |page|
 
         main_name = page.xpath("//p[@class='product_main_name']").text.strip.capitalize
-        image = page.xpath("//img[@id='bigpic']/@src")[0].value
+        image = page.xpath("//img[@id='bigpic']/@src").to_s
 
         product_list = page.xpath("//div[@class='attribute_list']//li//label")
         if product_list.length > 0 
@@ -76,12 +76,14 @@ def parse_product_pages(pages)
                 index += 1
             end
         else
-            prise = page.xpath("//span[@id='our_price_display']")[0]['content']
+            prise = page.xpath("//span[@id='our_price_display']/@content").to_s
             
-            product_data[main_name] = {
-                :prise => prise,
-                :image => image
-            }
+            unless main_name == "" || image == "" || prise == ""
+                product_data[main_name] = {
+                    :prise => prise,
+                    :image => image
+                }
+            end
         end
     end
 
