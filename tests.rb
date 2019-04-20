@@ -1,7 +1,7 @@
 require "minitest/autorun"
 require "curb"
 require "nokogiri"
-require "/home/fiza/Documents/MyProject/script.rb"
+require_relative 'script.rb'
 
 class TestScript < Minitest::Test
 
